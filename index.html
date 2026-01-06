@@ -15,6 +15,87 @@
         imagesizes="(max-width:900px) 90vw, 980px">
 </head>
 <body>
+  <!-- SPLASH SCREEN -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-content">
+      <div class="splash-left">
+        <h1 class="splash-title">web liquid glass , by jvalaj :)</h1>
+        <p class="splash-description">
+         after seeing apple’s latest liquid glass ui update, i wanted to recreate a similar effect on the web using only html, css, svg, and javascript. i really love apple’s creativity and how much care goes into their interface design.
+
+this project builds liquid glass visuals through layered blur, refraction, subtle chromatic aberration, and interaction-driven motion, all without webgl or external libraries.
+
+focus is on performance, visual fidelity, and attention to detail using native web primitives.
+        </p>
+       
+        <button class="splash-enter-btn" id="enterSiteBtn">
+          <span>enter the site</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+      <div class="splash-right">
+        <div class="splash-demo-wrapper">
+          <div class="liquidGlass-wrapper menu">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">
+              <div>New file</div>
+              <div>Open file</div>
+              <div>Settings</div>
+              <div>Repository</div>
+            </div>
+          </div>
+
+          <div class="liquidGlass-wrapper dock">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">
+              <div class="dock-icons">
+                <img src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/finder.png" alt="Finder"/>
+                <img src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/map.png" alt="Maps"/>
+                <img src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/messages.png" alt="Messages"/>
+                <img src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/notes.png" alt="Notes"/>
+                <img src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/safari.png" alt="Safari"/>
+                <img src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/books.png" alt="Books"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="liquidGlass-wrapper button-demo">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">
+              <span>Try hovering me!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SVG Filter for splash liquid glass -->
+    <svg style="display: none">
+      <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
+        <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" seed="5" result="turbulence"/>
+        <feComponentTransfer in="turbulence" result="mapped">
+          <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5"/>
+          <feFuncG type="gamma" amplitude="0" exponent="1" offset="0"/>
+          <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5"/>
+        </feComponentTransfer>
+        <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap"/>
+        <feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lighting-color="white" result="specLight">
+          <fePointLight x="-200" y="-200" z="300"/>
+        </feSpecularLighting>
+        <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage"/>
+        <feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </svg>
+  </div>
+
   <div class="cursor"></div>
   <header class="site-header" role="banner">
     <nav class="nav"  aria-label="Primary">
@@ -73,16 +154,19 @@
   <section class="product-highlights" data-animate="fadeInSoft" data-delay="200ms">
       <div class="highlight-grid">
         <div class="highlight" data-animate="slideUpSm" data-delay="240ms">
+        
           <h3>A17 Pro chip</h3>
           <h4>Pro performance</h4>
           <p>Game‑changing performance for everything.</p>
         </div>
         <div class="highlight" data-animate="slideUpSm" data-delay="400ms">
+      
           <h3>Action button</h3>
           <h4>Do more than ever</h4>
           <p>The Action button is a fast track to your favorite feature.</p>
         </div>
         <div class="highlight" data-animate="slideUpSm" data-delay="600ms">
+       
           <h3>Pro camera system</h3>
           <h4>Close‑up and farther out</h4>
           <p>Get incredible detail with the new camera.</p>
@@ -92,6 +176,12 @@
 
 <section class="feature-callout">
   <h2>Forged in titanium</h2>
+  <div class="liquidGlass-wrapper button-cta">
+    <div class="liquidGlass-effect"></div>
+    <div class="liquidGlass-tint"></div>
+    <div class="liquidGlass-shine"></div>
+    <div class="liquidGlass-text">Learn more</div>
+  </div>
 </section>
 
     <section class="section2">
@@ -115,41 +205,69 @@
     </section>
 
     <section class="tech-specs">
+      <video class="tech-specs-video" autoplay muted loop playsinline>
+        <source src="assets/flowing.mp4" type="video/mp4">
+      </video>
+      <div class="tech-specs-overlay"></div>
       <div class="specs-grid">
         <div class="spec">
+          <div class="liquidGlass-wrapper pill">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+          </div>
           <h3>Privacy</h3>
           <p>Your data stays yours.</p>
         </div>
         <div class="spec">
+          <div class="liquidGlass-wrapper pill">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2v10l4-4"/><path d="M2 12h4"/><path d="M12 22v-4"/></svg>
+            </div>
+          </div>
           <h3>Environment</h3>
           <p>Made with recycled materials by 2030.</p>
         </div>
         <div class="spec">
+          <div class="liquidGlass-wrapper pill">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+            </div>
+          </div>
           <h3>Accessibility</h3>
-          <p>Built‑in features that work .</p>
+          <p>Built‑in features that work.</p>
         </div>
       </div>
     </section>
 
      <section class="section3">
-    <div class="box">
-
-          <h2 >iPhone 17</h2>
-
-      <p>Buy 1, get 4 free.</p>
-      
+    <div class="box box-animated">
+      <div class="box-content">
+        <h2>iPhone 17</h2>
+        <p>Buy 1, get 4 free.</p>
+       
+      </div>
       <img src="assets/iphone17.png" class="section3image1"> 
     </div>
-    <div class="box">
-      <div>
-  <h2>Apple Card</h2>
-         <p>All credit on us. Spend freely.</p>
- 
+    <div class="box box-animated">
+      <div class="box-content">
+        <h2>Apple Card</h2>
+        <p>All credit on us. Spend freely.</p>
+        
       </div>
-           <img src="assets/card.png" class="section3image2"> 
-  
+      <img src="assets/card.png" class="section3image2"> 
     </div>
   </section>
+
   </main>
 
   <footer class="site-footer">
